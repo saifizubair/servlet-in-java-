@@ -1,0 +1,49 @@
+
+                     .........................................................java program.....................................................
+
+
+package com.servets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+
+public class second_servlet extends GenericServlet{
+    
+   public void service (ServletRequest req ,ServletResponse resp) throws IOException{
+       System.out.println("this is generic servlet");
+       resp.setContentType("text/html");
+       PrintWriter out =resp.getWriter();
+       out.println("this is my second servlet using generic servlet ");
+       
+   }
+}
+
+                 ..........................................................html file .............................................
+                 
+ <html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <h1>this is my first project</h1>
+        <h1><a href="abc">second_servlet</a></h1>
+    </body>
+</html>
+
+                   .................................................xml file ....................................................
+ <servlet>
+        <servlet-name>second</servlet-name>
+        <servlet-class>com.servets.second_servlet</servlet-class>
+    </servlet>
+    
+<servlet-mapping>
+   <servlet-name>second</servlet-name>
+   <url-pattern>/abc</url-pattern>
+</servlet-mapping>
