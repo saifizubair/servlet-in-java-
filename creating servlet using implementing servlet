@@ -1,0 +1,62 @@
+                                     ..................................................java program........................................................
+ package com.servets;
+import javax.servlet.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+public class firstservlet implements Servlet {
+    ServletConfig conf;
+    // life cycle method
+    public void init(ServletConfig conf){
+        this.conf =conf;
+        System.out.print("creating object...");
+    }
+    public void  service(ServletRequest req ,ServletResponse resp) throws IOException{
+    
+        System.out.print("servicing...");
+        // set the content type response 
+        resp.setContentType("text/html");
+        PrintWriter out =resp.getWriter();
+        out.println("this is my output from servlet method :</h1>");
+        out.println("today's date and time "+new Date().toString()+" ");
+        
+        
+    }
+    public void destroy(){
+           System.out.print("going to destroy...");
+    }
+    // non life cycle method
+    public ServletConfig getServletConfig(){
+        return this.conf;
+    }
+    public String getServletInfo(){
+        return " this is return by zubair";
+    }
+}
+..................................................................................html file .............................................................................. 
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <h1>this is my first project</h1>
+        <h1><a href="web">first_servlet</a></h1>
+    </body>
+</html>   
+
+..................................................................................xml file ..............................................................................                                                 
+                                                  ..........................<!--servlet declaration-->...................................
+    <servlet>
+        <servlet-name> first</servlet-name>
+        <servlet-class>com.servets.firstservlet</servlet-class>
+    </servlet>
+                                                  ..........................<!--servlet mapping-->...................................
+<servlet-mapping>
+        <servlet-name>first</servlet-name>
+        <url-pattern>/web</url-pattern>
+    </servlet-mapping>                                                   
+    
