@@ -1,0 +1,46 @@
+........................................................java progam..................................................................
+
+package com.practice;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class myservlet extends HttpServlet {
+    public void doGet(HttpServletRequest req ,HttpServletResponse resp) throws IOException{
+        System.out.print("this is get method ");
+        resp.setContentType("text/html");
+        PrintWriter out =resp.getWriter();
+        out.print("<h1>this is get method of my servlet</h1>");
+        
+    }
+}
+
+..........................................................xml file code  ..................................................................
+
+
+ <servlet> 
+        <servlet-name>myservlet</servlet-name>
+        <servlet-class>com.practice.myservlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>myservlet</servlet-name>
+        <url-pattern>/abcd</url-pattern>
+    </servlet-mapping>
+    
+.......................................................html file code .......................................................................
+
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <h1>this is my second project</h1>
+    </body>
+</html>
