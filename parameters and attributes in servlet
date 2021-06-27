@@ -1,0 +1,154 @@
+
+
+.........................................................java program ............................................................................
+.................................servlet 1 ...............................................................
+
+package com.attribute;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class s1 extends HttpServlet {
+
+   
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet s1</title>");            
+            out.println("</head>");
+            out.println("<body>");
+           String n1 =request.getParameter("n1");
+           String n2 =request.getParameter("n2");
+           int nn1 =Integer.parseInt(n1);
+            int nn2 =Integer.parseInt(n2);
+            //add
+            int s =nn1+nn2;
+            // set attributes 
+            request.setAttribute("sum",s);
+            
+            //request forwarderd by requestdispatcher
+            RequestDispatcher rd =request.getRequestDispatcher("s2");
+            rd.forward(request, response);
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+ 
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
+}
+
+
+....................................................servlet2.........................................................................
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class s2 extends HttpServlet {
+
+  
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet s2</title>");            
+            out.println("</head>");
+            out.println("<body>");
+             String n1 =request.getParameter("n1");
+           String n2 =request.getParameter("n2");
+           int nn1 =Integer.parseInt(n1);
+            int nn2 =Integer.parseInt(n2);
+            
+           int p =nn1*nn2;
+           
+           //get attributes from request object
+                int sum =(int)request.getAttribute("sum");
+                out.println("sum"+sum);
+                out.println("product "+p);
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+.............................................................html code .............................................................................
+
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>this is home html file </h1>
+        <a href="index.html">register here</a>
+        
+        <form action="s1">
+            n1:<input type="number"name="n1">
+            <br>
+            n2:<input type="number"name="n2">
+            <button type="submit">ok</button>
+        </form>
+    </body>
+</html>
+
+
+
+
+.......................................................xml code.......................................................................................
+
+
+ <servlet>
+        <servlet-name>s1</servlet-name>
+        <servlet-class>com.attribute.s1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>s2</servlet-name>
+        <servlet-class>com.attribute.s2</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>s1</servlet-name>
+        <url-pattern>/s1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>s2</servlet-name>
+        <url-pattern>/s2</url-pattern>
+    </servlet-mapping>
